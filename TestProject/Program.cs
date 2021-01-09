@@ -20,7 +20,7 @@ namespace TestProject
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>().UseUrls("http://192.168.1.82:5000");
+                    webBuilder.UseStartup<Startup>().UseUrls("http://192.168.0.48:5000");
                 });
     }
 }

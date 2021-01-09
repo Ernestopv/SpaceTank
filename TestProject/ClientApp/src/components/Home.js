@@ -16,7 +16,7 @@ export class Home extends Component {
             img.style.zIndex = -1;
             img.onload = imageOnload;
             img.onclick = imageOnclick;
-            img.src = "http://192.168.1.82:8090/?action=snapshot&n=" + (++imageNr);
+            img.src = "http://192.168.0.48:8090/?action=snapshot&n=" + (++imageNr);
             var webcam = document.getElementById("webcam");
             webcam.insertBefore(img, webcam.firstChild);
         }
