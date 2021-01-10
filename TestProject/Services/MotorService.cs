@@ -1,34 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Device.Pwm;
-using System.Linq;
-using System.Threading.Tasks;
-using DCMotorDrivers;
+﻿using DCMotorDrivers;
+using TestProject.Configuration;
 
 namespace TestProject.Services
 {
     public class MotorService
     {
-        private readonly DCMotor _motor;
+        private readonly DCMotor _motor1;
+        private readonly DCMotor _motor2;
         public MotorService()
         {
-             _motor = DCMotor.Create(GPIO.GPIO.ENA, GPIO.GPIO.IN1, GPIO.GPIO.IN2, null, false);
+             _motor1 = DCMotor.Create(GPIO.ENA, GPIO.IN1, GPIO.IN2, null, false);
+             _motor2 = DCMotor.Create(GPIO.ENB, GPIO.IN3, GPIO.IN4, null, false);
         }
 
 
         public void Forward()
         {
-            _motor.Speed = 1;
+            _motor1.Speed = 1;
+            _motor2.Speed = 1;
         }
 
         public void Stop()
         {
-            _motor.Speed = 0;
+            _motor1.Speed = 0;
+            _motor2.Speed = 0;
         }
 
-        public void Back()
+        public void Reverse()
         {
-            _motor.Speed = -1;
+            _motor1.Speed = -1;
+            _motor2.Speed = -1;
         }
     }
 

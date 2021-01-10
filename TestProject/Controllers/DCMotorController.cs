@@ -19,33 +19,33 @@ namespace TestProject.Controllers
 
 
 
-        [HttpGet]
+        [HttpPost("forward")]
         public IActionResult Get()
         {
 
-            _logger.LogWarning("ON");
+            _logger.LogWarning("Forward");
             _motorService.Forward();
             return Ok();
         }
 
 
-        [HttpGet("off")]
-        public IActionResult GetOff()
+        [HttpPost("stop")]
+        public IActionResult SetStop()
         {
 
-            _logger.LogWarning("Off");
+            _logger.LogWarning("Stop");
             _motorService.Stop();
             return Ok();
         }
 
 
 
-        [HttpGet("back")]
-        public IActionResult GetBack()
+        [HttpPost("reverse")]
+        public IActionResult SetReverse()
         {
 
-            _logger.LogWarning("Back");
-            _motorService.Back();
+            _logger.LogWarning("reverse");
+            _motorService.Reverse();
             return Ok();
         }
     }
