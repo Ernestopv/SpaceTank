@@ -31,6 +31,19 @@ namespace TestProject.Services
             _motor1.Speed = -1;
             _motor2.Speed = -1;
         }
+
+
+        public void Left()
+        {
+            _motor1.Speed = 0;
+            _motor2.Speed = 1;
+        }
+
+        public void Right()
+        {
+            _motor1.Speed = 1;
+            _motor2.Speed = 0;
+        }
     }
 
 

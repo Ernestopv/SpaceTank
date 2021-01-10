@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TestProject.Configuration;
 using TestProject.Services;
 
 namespace TestProject.Controllers
@@ -19,13 +20,35 @@ namespace TestProject.Controllers
 
 
 
-        [HttpPost("forward")]
-        public IActionResult Get()
+        [HttpPost("direction")]
+        public IActionResult SetDirection([FromBody]DirectionModel direction)
         {
+            switch (direction.Angle)
+            {
+                case "up" when direction.Angle == "up":
+                    _logger.LogWarning("Forward");
 
-            _logger.LogWarning("Forward");
-            _motorService.Forward();
-            return Ok();
+                    _motorService.Forward();
+                    return Ok("forward");
+                case "down" when direction.Angle == "down":
+                    _logger.LogWarning("reverse");
+
+                    _motorService.Reverse();
+                    return Ok("Reverse");
+
+                case "right" when direction.Angle == "right":
+                    _logger.LogWarning("right");
+
+                    _motorService.Right();
+                    return Ok("Right");
+                case "left" when direction.Angle == "left":
+                    _logger.LogWarning("left");
+
+                    _motorService.Left();
+                    return Ok("Left");
+                default:
+                    return Ok(direction);
+            }
         }
 
 
@@ -35,18 +58,11 @@ namespace TestProject.Controllers
 
             _logger.LogWarning("Stop");
             _motorService.Stop();
-            return Ok();
+            return Ok("stop");
         }
 
 
 
-        [HttpPost("reverse")]
-        public IActionResult SetReverse()
-        {
-
-            _logger.LogWarning("reverse");
-            _motorService.Reverse();
-            return Ok();
-        }
+   
     }
 }

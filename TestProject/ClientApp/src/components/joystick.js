@@ -34,6 +34,7 @@ class Control extends Component {
   constructor() {
     super();
     this.managerListener = this.managerListener.bind(this);
+    this.handleStop = this.handleStop.bind(this);
   }
 
   managerListener(manager) {
@@ -46,12 +47,30 @@ class Control extends Component {
         if (values !== undefined) {
           const { x, y, angle } = values;
           console.log("x :" + x + " y: " + y + " angle: " + angle);
+          this.handledirection(y, x, angle);
         }
       }
     });
 
     manager.on("end", () => {
+      this.handleStop();
       console.log("stop");
+    });
+  }
+
+  handleStop() {
+    fetch("/DCMotor/stop", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: null,
+    });
+  }
+
+  handledirection(y, x, angle) {
+    fetch("/DCMotor/direction", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Y: y, X: x, Angle: angle }),
     });
   }
 
