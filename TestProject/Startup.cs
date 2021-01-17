@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TestProject.Configuration;
 using TestProject.Services;
 
 namespace TestProject
@@ -13,6 +14,11 @@ namespace TestProject
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            // read Json file "appsettings.json "
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json");
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -20,7 +26,10 @@ namespace TestProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            // Add functionality to inject IOptions<T>
+            // Add our Config object so it can be injected
+            services.Configure<Settings>(options => { Configuration.GetSection("Settings").Bind(options); });
+            services.AddOptions();
             services.AddControllersWithViews();
             services.AddSingleton<MotorService>();
             // In production, the React files will be served from this directory

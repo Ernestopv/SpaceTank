@@ -4,7 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.Options;
+using TestProject.Configuration;
 
 namespace TestProject.Controllers
 {
@@ -12,25 +16,28 @@ namespace TestProject.Controllers
     [Route("[controller]")]
     public class UtilitiesController : ControllerBase
     {
-        private readonly ILogger<UtilitiesController> _logger;
-        public UtilitiesController(ILogger<UtilitiesController> logger)
+        
+        private readonly bool EXT_IP_Enabled;
+        public UtilitiesController(IOptions<Settings> settings)
         {
-            _logger = logger;
+            EXT_IP_Enabled = settings.Value.EnablePortForwarding;
         }
 
         [HttpGet("getIP")]
         public IActionResult GetIP()
         {
-            var hostName = Dns.GetHostName();
-            var ipAddress = Dns.GetHostAddresses(hostName);
-            var IP = "";
-            foreach (IPAddress ip in ipAddress)
+            string ip;
+            if (EXT_IP_Enabled)
             {
-                IP = ip.ToString();
+                ip = new System.Net.WebClient().DownloadString("https://api.ipify.org");
+                 //ip = HttpContext.Connection.RemoteIpAddress?.ToString(); // to be consider EPV 
+                 return Ok( new { ip = ip != "" ? ip : "localhost" });
             }
-
-            var result  = new {ip = IP != "" ? IP : "localhost"};
-            return Ok(result);
+            var feature = HttpContext.Features.Get<IHttpConnectionFeature>();
+            var localIpAddressValues = feature?.LocalIpAddress?.ToString();
+            var scrapIp = localIpAddressValues.Split(":"); 
+            ip = scrapIp[3];
+            return Ok(new { ip = ip != "" ? ip : "localhost" });
         }
     }
 }
