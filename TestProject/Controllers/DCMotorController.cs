@@ -61,8 +61,5 @@ namespace TestProject.Controllers
             return Ok("stop");
         }
 
-
-
-   
     }
 }
