@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TestProject.Configuration;
 using TestProject.Services;
 
 namespace TestProject.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class DCMotorController : ControllerBase
@@ -12,7 +14,7 @@ namespace TestProject.Controllers
 
         private readonly ILogger<DCMotorController> _logger;
         private readonly MotorService _motorService;
-        public DCMotorController(ILogger<DCMotorController> logger, MotorService motorService)
+        public DCMotorController(ILogger<DCMotorController> logger,MotorService motorService)
         {
             _logger = logger;
             _motorService = motorService;
@@ -21,7 +23,7 @@ namespace TestProject.Controllers
 
 
         [HttpPost("direction")]
-        public IActionResult SetDirection([FromBody]DirectionModel direction)
+        public IActionResult SetDirection([FromBody] DirectionModel direction)
         {
             switch (direction.Angle)
             {
@@ -61,8 +63,5 @@ namespace TestProject.Controllers
             return Ok("stop");
         }
 
-
-
-   
     }
 }

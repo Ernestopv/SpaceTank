@@ -37,8 +37,8 @@ export class NavMenu extends Component {
           light
         >
           <Container>
-            <NavbarBrand tag={Link} to="/">
-              SpaceTank
+            <NavbarBrand tag={Link} to="/DriverPanel">
+            <i class="bi bi-broadcast"></i> SpaceTank
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse
@@ -49,12 +49,17 @@ export class NavMenu extends Component {
               <ul className="navbar-nav flex-grow">
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/DriverPanel">
-                    DriverPanel
+                  <button type="button" class="btn btn-info"> <i class="bi bi-joystick"></i> Driver Panel</button>
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/settings">
-                    Settings
+                <button type="button" class="btn btn-info">  <i class="bi bi-gear-fill"></i>  Settings</button>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/">
+                <button type="button" class="btn btn-info"><i class="bi bi-box-arrow-right"></i> Login Out</button>
                   </NavLink>
                 </NavItem>
               </ul>
