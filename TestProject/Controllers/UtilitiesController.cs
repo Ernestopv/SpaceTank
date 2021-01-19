@@ -35,9 +35,17 @@ namespace TestProject.Controllers
             }
             var feature = HttpContext.Features.Get<IHttpConnectionFeature>();
             var localIpAddressValues = feature?.LocalIpAddress?.ToString();
-            var scrapIp = localIpAddressValues.Split(":"); 
-            ip = scrapIp[3];
-            return Ok(new { ip = ip != "" ? ip : "localhost" });
+            if (localIpAddressValues != null)
+            {
+                var scrapIp = localIpAddressValues.Split(":");
+                if (scrapIp.Length != 3)
+                {
+                    ip = scrapIp[3];
+                    return Ok(new {ip = ip != "1" ? ip : "localhost"});
+                }
+            }
+
+            return Ok(new { ip =  "localhost" });
         }
     }
 }
