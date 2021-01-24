@@ -16,7 +16,7 @@ JoyStick.defaultProps = {
     width: "50%",
     height: "30vh",
     position: "relative",
-    background: "linear-gradient(to right, #E684AE, #79CBCA, #77A1D3)",
+    background: "linear-gradient(to right, #E684AE,#79a2cb, #77A1D3)",
   },
 };
 
@@ -31,7 +31,7 @@ const containerStyle = {
   position: "relative",
   height: "30vh",
   width: "100%",
-  background: "linear-gradient(to right, #77A1D3, #79CBCA, #77A1D3)",
+  background: "linear-gradient(to right, #77A1D3, #79a2cb, #77A1D3)",
 };
 
 class Control extends Component {

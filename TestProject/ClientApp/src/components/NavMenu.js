@@ -78,7 +78,10 @@ export class NavMenu extends Component {
                         className="text-dark"
                         to="/DriverPanel"
                       >
-                        <button type="button" className="btn btn-info">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg"
+                        >
                           {" "}
                           <i className="bi bi-joystick"></i> Driver Panel
                         </button>
@@ -86,7 +89,10 @@ export class NavMenu extends Component {
                     </NavItem>
                     <NavItem>
                       <NavLink tag={Link} className="text-dark" to="/settings">
-                        <button type="button" className="btn btn-info">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg"
+                        >
                           {" "}
                           <i className="bi bi-gear-fill"></i> Settings
                         </button>
@@ -94,7 +100,10 @@ export class NavMenu extends Component {
                     </NavItem>
                     <NavItem>
                       <NavLink tag={Link} className="text-dark" to="/logout">
-                        <button type="button" className="btn btn-info">
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg"
+                        >
                           <i className="bi bi-box-arrow-right"></i> Login Out
                         </button>
                       </NavLink>

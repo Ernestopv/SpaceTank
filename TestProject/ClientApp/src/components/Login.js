@@ -83,7 +83,7 @@ export class Login extends Component {
             <br />
             <br />
 
-            <button className="w-100 btn btn-lg btn-info" type="submit">
+            <button className="w-100 btn btn-primary btn-lg" type="submit">
               Sign in
             </button>
             <p className="mt-5 mb-3 text-muted">&copy;Ernesto Prado 2020</p>
