@@ -1,17 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Options;
 using TestProject.Configuration;
 
 namespace TestProject.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UtilitiesController : ControllerBase

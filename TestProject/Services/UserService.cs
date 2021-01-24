@@ -23,7 +23,7 @@ namespace TestProject.Services
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
         public List<User> _users = new List<User>
         {
-            new User { Id = 1, FirstName = "Ernesto", LastName = "Prado", Username = "Ernesto", Password = "password" }
+            new User { Id = 1, FirstName = "Ernesto", LastName = "Prado", Username = "user@email.com", Password = "password" }
         };
 
         private readonly JWT  _appSettings;
@@ -65,7 +65,7 @@ namespace TestProject.Services
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()), new Claim("name", user.FirstName), new Claim("Email", user.Username) }),
                 Expires = DateTime.UtcNow.AddMinutes(_appSettings.DurationInMin),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

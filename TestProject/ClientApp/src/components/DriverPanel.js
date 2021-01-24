@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import Joystick from "./joystick";
+import axios from "axios";
+
+axios.defaults.headers.common["Authorization"] =
+  "Bearer " + localStorage.getItem("token");
 
 export class DriverPanel extends Component {
   static displayName = DriverPanel.name;
@@ -9,13 +13,13 @@ export class DriverPanel extends Component {
     this.state = { ip: "" };
   }
 
-  componentDidMount() {
-    this.GetIP();
+  async componentDidMount() {
+    await this.GetIP();
   }
 
   async GetIP() {
-    const response = await fetch("utilities/getip");
-    const data = await response.json();
+    const response = await axios.get("utilities/getip");
+    const { data } = response;
     this.setState({ ip: data.ip });
   }
 

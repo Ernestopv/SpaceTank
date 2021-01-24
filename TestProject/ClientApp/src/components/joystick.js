@@ -1,5 +1,9 @@
 ﻿import React, { Component } from "react";
 import JoyStick from "react-joystick";
+import axios from "axios";
+
+axios.defaults.headers.common["Authorization"] =
+  "Bearer " + localStorage.getItem("token");
 
 JoyStick.defaultProps = {
   options: {
@@ -37,41 +41,32 @@ class Control extends Component {
     this.handleStop = this.handleStop.bind(this);
   }
 
-  managerListener(manager) {
+  async managerListener(manager) {
     manager.on("move", (e, stick) => {
       const identifier = stick.identifier;
-
       const values = stick.direction;
 
       if (identifier > 0) {
         if (values !== undefined) {
           const { x, y, angle } = values;
           console.log("x :" + x + " y: " + y + " angle: " + angle);
-          this.handledirection(y, x, angle);
+          this.handleDirection(y, x, angle);
         }
       }
     });
-
     manager.on("end", () => {
       this.handleStop();
       console.log("stop");
     });
   }
 
-  handleStop() {
-    fetch("/DCMotor/stop", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: null,
-    });
+  async handleStop() {
+    await axios.post("/DCMotor/stop", null);
   }
 
-  handledirection(y, x, angle) {
-    fetch("/DCMotor/direction", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ Y: y, X: x, Angle: angle }),
-    });
+  async handleDirection(y, x, angle) {
+    const direction = { Y: y, X: x, Angle: angle };
+    await axios.post("/DCMotor/direction", direction);
   }
 
   render() {

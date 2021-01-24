@@ -6,6 +6,7 @@ using TestProject.Services;
 
 namespace TestProject.Controllers
 {
+  
     [Authorize]
     [Route("[controller]")]
     [ApiController]
@@ -30,26 +31,26 @@ namespace TestProject.Controllers
                 case "up" when direction.Angle == "up":
                     _logger.LogWarning("Forward");
 
-                    _motorService.Forward();
-                    return Ok("forward");
+                   _motorService.Forward();
+                    return Ok(new{response ="forward"});
                 case "down" when direction.Angle == "down":
                     _logger.LogWarning("reverse");
 
                     _motorService.Reverse();
-                    return Ok("Reverse");
+                    return Ok(new {reponse="Reverse"});
 
                 case "right" when direction.Angle == "right":
                     _logger.LogWarning("right");
 
                     _motorService.Right();
-                    return Ok("Right");
+                    return Ok(new {response="Right"});
                 case "left" when direction.Angle == "left":
                     _logger.LogWarning("left");
 
-                    _motorService.Left();
-                    return Ok("Left");
+                   _motorService.Left();
+                    return Ok(new {response="Left"});
                 default:
-                    return Ok(direction);
+                    return Ok(new {response=direction});
             }
         }
 
@@ -60,7 +61,7 @@ namespace TestProject.Controllers
 
             _logger.LogWarning("Stop");
             _motorService.Stop();
-            return Ok("stop");
+            return Ok(new {response="stop"});
         }
 
     }
