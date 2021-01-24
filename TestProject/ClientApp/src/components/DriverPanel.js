@@ -29,10 +29,10 @@ export class DriverPanel extends Component {
 
   render() {
     return (
-      <div width="100%" height="400">
+      <div width="100%" height="100%">
         <div>
           <center>
-            <img src={this.setSourceIP()} width="100%" height="320" />
+            <img src={this.setSourceIP()} width="100%" height="380" />
           </center>
           <div className="container jumbotron mt-3">
             <Joystick />
