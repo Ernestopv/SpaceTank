@@ -40,26 +40,34 @@ export class NavMenu extends Component {
   }
 
   render() {
+    const style = {
+      color: "#3b8fe3",
+      fontSize: 26,
+    };
     return (
       <header>
         <Navbar
           user={this.state.user}
-          className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+          className=" navbar-inverse navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
           light
         >
-          <Container>
+          <Container className="container-fluid">
             {this.state.user && (
               <React.Fragment>
-                <NavbarBrand tag={Link} to="/DriverPanel">
-                  <i className="bi bi-broadcast"></i> SpaceTank
-                </NavbarBrand>
+                <div class="navbar-header">
+                  <NavbarBrand style={style} tag={Link} to="/DriverPanel">
+                    <i className="bi bi-broadcast"></i> SpaceTank
+                  </NavbarBrand>
+                </div>
               </React.Fragment>
             )}
             {!this.state.user && (
               <React.Fragment>
-                <NavbarBrand>
-                  <i className="bi bi-broadcast"></i> SpaceTank
-                </NavbarBrand>
+                <div class="navbar-header">
+                  <NavbarBrand style={style}>
+                    <i className="bi bi-broadcast"></i> SpaceTank
+                  </NavbarBrand>
+                </div>
               </React.Fragment>
             )}
 
@@ -71,7 +79,7 @@ export class NavMenu extends Component {
                   isOpen={!this.state.collapsed}
                   navbar
                 >
-                  <ul className="navbar-nav flex-grow">
+                  <ul className="nav navbar-nav navbar-left">
                     <NavItem>
                       <NavLink
                         tag={Link}
