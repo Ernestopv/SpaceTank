@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -16,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using SpaceTank.Auth;
 using SpaceTank.Auth.Midleware;
 using SpaceTank.Services;
+using System.IO;
+using System.Text;
 
 namespace SpaceTank
 {
