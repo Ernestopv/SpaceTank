@@ -8,5 +8,6 @@
         public const int IN2 = 24;
         public const int IN3 = 20;
         public const int IN4 = 21;
+        public const int Light = 17;
     }
 }

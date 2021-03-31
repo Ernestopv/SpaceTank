@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Device.Gpio;
+using System.Drawing.Text;
+using Iot.Device.Ssd1351;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Options;
@@ -13,9 +16,11 @@ namespace TestProject.Controllers
     {
         
         private readonly bool EXT_IP_Enabled;
+        private readonly  GpioController _gpio;
         public UtilitiesController(IOptions<Settings> settings)
         {
             EXT_IP_Enabled = settings.Value.EnablePortForwarding;
+            _gpio = new GpioController();
         }
 
         [HttpGet("getIP")]
@@ -42,5 +47,29 @@ namespace TestProject.Controllers
 
             return Ok(new { ip =  "localhost" });
         }
+
+
+        [HttpGet("getLightOn")]
+        public IActionResult GetLightON()
+        {
+            _gpio.OpenPin(GPIO.Light, PinMode.Output);
+            _gpio.Write(GPIO.Light, PinValue.High);
+
+            return Ok();
+
+        }
+
+        [HttpGet("getLightOff")]
+        public IActionResult GetLightOff()
+        {
+            _gpio.OpenPin(GPIO.Light, PinMode.Output);
+            _gpio.Write(GPIO.Light, PinValue.Low);
+
+            return Ok();
+
+        }
+
+
+
     }
 }
